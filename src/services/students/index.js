@@ -47,6 +47,11 @@ router.get('/:id', async (req, res) => {
     }
 })
 
+router.get('/search/:firstname'), async(req,res)=>{
+    const response = await db.query(`SELECT * FROM students WHERE firstName LIKE $1`, [req.params.firstname + '%'])
+    
+        res.send(response.rows[0]);
+}
 
 router.post('/', async (req, res) => {
     const request = await db.query(`INSERT INTO students (firstName, lastName, email, dateOfBirth) 
